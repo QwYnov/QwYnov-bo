@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
       .then(
         res => {
           this.errorMessage = "";
+          this.router.navigate(['home']);
         }, err => {
           this.errorMessage = err.message;
         }
