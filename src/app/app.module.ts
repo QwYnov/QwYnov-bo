@@ -9,15 +9,18 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore/';
 import { firebaseConfig } from '../config/firebase.js';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 const ROUTES: Route[] = [
-  { path: '', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

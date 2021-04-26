@@ -19,6 +19,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
+
   }
 
   loginUser(value) {
@@ -28,6 +34,17 @@ export class LoginComponent implements OnInit {
       }, err => {
         this.errorMessage = err.message;
       })
+  }
+
+  loginUserAdmin(value) {
+    this.authService.loginUserAdmin(value)
+      .then(
+        res => {
+          this.errorMessage = "";
+        }, err => {
+          this.errorMessage = err.message;
+        }
+      )
   }
 
 }

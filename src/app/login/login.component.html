@@ -1,4 +1,4 @@
-<form class="form" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" >
+<form class="form" [formGroup]="loginForm" (ngSubmit)="loginUserAdmin(loginForm.value)" >
 
     <div class="form-group">
         <label>Email</label>
@@ -7,7 +7,7 @@
 
     <div>
         <label>Mot de passe</label>
-        <input type="text" class="form-control" placeholder="Entrez un mdp" formControlName="password">
+        <input type="password" class="form-control" placeholder="Entrez un mdp" formControlName="password">
     </div>
 
     <button type="sumbit">Se connecter</button>

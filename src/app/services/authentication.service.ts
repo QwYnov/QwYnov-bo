@@ -1,4 +1,4 @@
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, QuerySnapshot, DocumentSnapshot } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -21,10 +21,10 @@ export class AuthenticationService {
             this.firestore.collection('users').doc(res.user.uid).set({
               email: value.email,
               administrator: false,
-            })),
-          err => reject(err))
-     
-      
+            })
+          ),
+        err => reject(err)
+        )
     })
 
     
@@ -36,6 +36,23 @@ export class AuthenticationService {
         .then(
           res => resolve(res),
           err => reject(err))
+    })
+  }
+
+  loginUserAdmin(value) {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.signInWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(
+            this.firestore.collection('users').doc(res.user.uid).get().subscribe(
+              (documentSnapshot: DocumentSnapshot<any>) => {
+                const data = documentSnapshot.data();
+                if(data.administrator) res;
+              }
+            )
+          ),
+          err => reject(err)
+        )
     })
   }
 
