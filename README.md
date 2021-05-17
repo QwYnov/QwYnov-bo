@@ -29,4 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deploy thanks Firebase
 
-Run `firebase deploy` to execute and deploy on firebase hosting
+Run `ng build --prod` and `firebase deploy` to execute and deploy on firebase hosting
