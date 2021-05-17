@@ -71,10 +71,10 @@ export class HomeComponent implements OnInit {
 
   deleteQuestion(index) {
     this.questService.deleteQuestion(index);
+    window.location.reload();
   }
 
   createQuestion(value) {
-    console.log(value);
     let newQuestion = {};
     newQuestion['question'] = value['questionLabel'];
     newQuestion['answer1'] = value['answerField1'];
@@ -86,7 +86,6 @@ export class HomeComponent implements OnInit {
     newQuestion['goodAnswer2'] = (value['goodAnswer'] === 'answer2');
     newQuestion['goodAnswer3'] = (value['goodAnswer'] === 'answer3');
     newQuestion['goodAnswer4'] = (value['goodAnswer'] === 'answer4');
-    this.questions.push(newQuestion);
     this.questService.createQuestion(newQuestion);
   }
 
