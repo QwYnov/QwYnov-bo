@@ -52,7 +52,7 @@ Gestion des questions
                 <option *ngFor="let q of questions, let i = index;" [ngValue]="q.id">{{i+1}}; {{ q.question.question }}</option>
             </select>
         </div>
-        <button type="sumbit">Supprimer</button>
+        <button type="submit">Supprimer</button>
     </form>
 </div>
 <div class="creer-question">
@@ -87,6 +87,11 @@ Gestion des questions
             <input type="radio" name="difficulty" value="hard" formControlName="difficulty"> <label>Difficile</label>
             <br>
         </div>
-        <button type="sumbit">Créer</button>
+        <button type="submit">Créer</button>
+    </form>
+
+    <form class="form" [formGroup]="logoutForm" (ngSubmit)="logout()">
+        <div class="form-group"></div>
+        <button type="submit">Se déconnecter</button>
     </form>
 </div>

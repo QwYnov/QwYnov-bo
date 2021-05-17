@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   deleteForm: FormGroup;
   createForm: FormGroup;
   updateForm: FormGroup;
+  logoutForm: FormGroup;
   selectedQuestion: number;
   showQuestion: number;
 
@@ -64,6 +65,8 @@ export class HomeComponent implements OnInit {
       goodAnswer: new FormControl(''),
       difficulty: new FormControl('')
     });
+
+    this.logoutForm = this.formBuilder.group({});
   }
 
   deleteQuestion(index) {
@@ -104,5 +107,12 @@ export class HomeComponent implements OnInit {
     newQuestion['goodAnswer3'] = (value['goodAnswer'] === 'answer3');
     newQuestion['goodAnswer4'] = (value['goodAnswer'] === 'answer4');
     this.questService.updateQuestion(newQuestion, index);
+  }
+
+  logout() {
+    this.authService.logoutUser()
+      .then((res) => {
+        this.router.navigate(['login']);
+      });
   }
 }
