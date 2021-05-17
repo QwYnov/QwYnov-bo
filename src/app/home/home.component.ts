@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.userDetails().subscribe(res => {
-      if (res==null) {
+    this.authService.userDetails().subscribe((res) => {
+      if (res===null) {
         this.router.navigate(['login']);
       } else {
         console.log(res);
@@ -71,7 +71,6 @@ export class HomeComponent implements OnInit {
 
   deleteQuestion(index) {
     this.questService.deleteQuestion(index);
-    window.location.reload();
   }
 
   createQuestion(value) {

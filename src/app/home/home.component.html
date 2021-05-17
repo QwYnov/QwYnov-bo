@@ -1,113 +1,117 @@
-<div class="card mb-3" style="max-width: 40rem;">
-    <div class="card-header">
-        Liste de questions (Déplier pour modifier)
-    </div>
-    <div class="card-body">
-        <ul>
-            <li *ngFor="let q of questions; let i = index;">
-                {{ q.question.question }} (<a (click)="showQuestionDetails(i)">Déplier</a>)
-                <div *ngIf="this.showQuestion === i">
-                    <form class="form" [formGroup]="updateForm" (ngSubmit)="updateDetails(updateForm.value, q.id)">
-                        <div class="form-group">
-                            <label>Libellé de la question</label>
-                            <input type="text" class="form-control" formControlName="questionLabel" [ngValue]="q.question.question.toString()">
-                        </div>
-                        <div class="form-group">
-                            <label>Liste des réponses (cochez la bonne réponse)</label>
-                            <ul>
-                                <li>
-                                    <input type="radio" name="goodAnswer" value="answer1" formControlName="goodAnswer" [checked]="q.question.goodAnswer1">
-                                    <input type="text" class="form-control" formControlName="answerField1" [ngValue]="q.question.answer1.toString()"> 
-                                </li>
-                                <li>
-                                    <input type="radio" name="goodAnswer" value="answer2" formControlName="goodAnswer" [checked]="q.question.goodAnswer2">
-                                    <input type="text" class="form-control" formControlName="answerField2" [ngValue]="q.question.answer2.toString()"> 
-                                </li>
-                                <li>
-                                    <input type="radio" name="goodAnswer" value="answer3" formControlName="goodAnswer" [checked]="q.question.goodAnswer3">
-                                    <input type="text" class="form-control" formControlName="answerField3" [ngValue]="q.question.answer3.toString()"> 
-                                </li>
-                                <li>
-                                    <input type="radio" name="goodAnswer" value="answer4" formControlName="goodAnswer" [checked]="q.question.goodAnswer4">
-                                    <input type="text" class="form-control" formControlName="answerField4" [ngValue]="q.question.answer4.toString()"> 
-                                </li>
-                            </ul>
-                            <input type="radio" name="difficulty" value="easy" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'easy'"> 
-                            <label>Facile</label>
-                            <input type="radio" name="difficulty" value="normal" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'normal'"> 
-                            <label>Normal</label>
-                            <input type="radio" name="difficulty" value="hard" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'hard'"> 
-                            <label>Difficile</label>
-                            <br>
-                        </div>
-                        <button class="btn btn-outline-primary" type="submit">Mettre à jour</button>
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="card mb-3" style="max-width: 40rem;">
-    <div class="card-header">
-        Supprimer une question
-    </div>
-    <div class="card-body">
-        <form class="form" [formGroup]="deleteForm" (ngSubmit)="deleteQuestion(selectedQuestion)">
-            <div class="form-group">
-                <select class="form-control" formControlName="deleteChoice" [(ngModel)]="selectedQuestion">
-                    <option *ngFor="let q of questions, let i = index;" [ngValue]="q.id">{{i+1}}; {{ q.question.question }}</option>
-                </select>
-            </div>
-            <button class="btn btn-outline-primary" type="submit">Supprimer</button>
-        </form>
-    </div>
-</div>
-<div class="card mb-3" style="max-width: 40rem;">
-    <div class="card-header">
-        Créer une question
-    </div>
-    <div class="card-body">
-        <form class="form" [formGroup]="createForm" (ngSubmit)="createQuestion(createForm.value)">
-            <div class="form-group">
-                <label>Libellé de la question</label>
-                <input type="text" class="form-control" formControlName="questionLabel">
-            </div>
-            <div class="form-group">
-                <label>Liste des réponses (cochez la bonne réponse)</label>
-                <ul>
-                    <li>
-                        <input type="radio" name="goodAnswer" value="answer1" formControlName="goodAnswer">
-                        <input type="text" class="form-control" formControlName="answerField1"> 
-                    </li>
-                    <li>
-                        <input type="radio" name="goodAnswer" value="answer2" formControlName="goodAnswer">
-                        <input type="text" class="form-control" formControlName="answerField2"> 
-                    </li>
-                    <li>
-                        <input type="radio" name="goodAnswer" value="answer3" formControlName="goodAnswer">
-                        <input type="text" class="form-control" formControlName="answerField3"> 
-                    </li>
-                    <li>
-                        <input type="radio" name="goodAnswer" value="answer4" formControlName="goodAnswer">
-                        <input type="text" class="form-control" formControlName="answerField4"> 
-                    </li>
-                </ul>
-                <input type="radio" name="difficulty" value="easy" formControlName="difficulty"> <label>Facile</label>
-                <input type="radio" name="difficulty" value="normal" formControlName="difficulty"> <label>Normal</label>
-                <input type="radio" name="difficulty" value="hard" formControlName="difficulty"> <label>Difficile</label>
-                <br>
-            </div>
-            <button class="btn btn-outline-primary" type="submit">Créer</button>
-        </form>
-    </div>
 
-    <div class="card">
+
+<div class="background">
+    <div class="card mb-3" style="max-width: 40rem;">
+        <div class="card-header">
+            Liste de questions (Déplier pour modifier)
+        </div>
         <div class="card-body">
-            <form class="form" [formGroup]="logoutForm" (ngSubmit)="logout()">
-                <div class="form-group"></div>
-                <button class="btn btn-outline-primary" type="submit">Se déconnecter</button>
+            <ul>
+                <li *ngFor="let q of questions; let i = index;">
+                    {{ q.question.question }} (<a (click)="showQuestionDetails(i)">Déplier</a>)
+                    <div *ngIf="this.showQuestion === i">
+                        <form class="form" [formGroup]="updateForm" (ngSubmit)="updateDetails(updateForm.value, q.id)">
+                            <div class="form-group">
+                                <label>Libellé de la question</label>
+                                <input type="text" class="form-control" formControlName="questionLabel" [ngValue]="q.question.question.toString()">
+                            </div>
+                            <div class="form-group">
+                                <label>Liste des réponses (cochez la bonne réponse)</label>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="goodAnswer" value="answer1" formControlName="goodAnswer" [checked]="q.question.goodAnswer1">
+                                        <input type="text" class="form-control" formControlName="answerField1" [ngValue]="q.question.answer1.toString()"> 
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="goodAnswer" value="answer2" formControlName="goodAnswer" [checked]="q.question.goodAnswer2">
+                                        <input type="text" class="form-control" formControlName="answerField2" [ngValue]="q.question.answer2.toString()"> 
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="goodAnswer" value="answer3" formControlName="goodAnswer" [checked]="q.question.goodAnswer3">
+                                        <input type="text" class="form-control" formControlName="answerField3" [ngValue]="q.question.answer3.toString()"> 
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="goodAnswer" value="answer4" formControlName="goodAnswer" [checked]="q.question.goodAnswer4">
+                                        <input type="text" class="form-control" formControlName="answerField4" [ngValue]="q.question.answer4.toString()"> 
+                                    </li>
+                                </ul>
+                                <input type="radio" name="difficulty" value="easy" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'easy'"> 
+                                <label>Facile</label>
+                                <input type="radio" name="difficulty" value="normal" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'normal'"> 
+                                <label>Normal</label>
+                                <input type="radio" name="difficulty" value="hard" formControlName="difficulty" [checked]="q.question.difficulty.toString() === 'hard'"> 
+                                <label>Difficile</label>
+                                <br>
+                            </div>
+                            <button class="btn btn-outline-primary" type="submit">Mettre à jour</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 40rem;">
+        <div class="card-header">
+            Supprimer une question
+        </div>
+        <div class="card-body">
+            <form class="form" [formGroup]="deleteForm" (ngSubmit)="deleteQuestion(selectedQuestion)">
+                <div class="form-group">
+                    <select class="form-control" formControlName="deleteChoice" [(ngModel)]="selectedQuestion">
+                        <option *ngFor="let q of questions, let i = index;" [ngValue]="q.id">{{i+1}}; {{ q.question.question }}</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-primary" type="submit">Supprimer</button>
             </form>
         </div>
     </div>
-
+    <div class="card mb-3" style="max-width: 40rem;">
+        <div class="card-header">
+            Créer une question
+        </div>
+        <div class="card-body">
+            <form class="form" [formGroup]="createForm" (ngSubmit)="createQuestion(createForm.value)">
+                <div class="form-group">
+                    <label>Libellé de la question</label>
+                    <input type="text" class="form-control" formControlName="questionLabel">
+                </div>
+                <div class="form-group">
+                    <label>Liste des réponses (cochez la bonne réponse)</label>
+                    <ul>
+                        <li>
+                            <input type="radio" name="goodAnswer" value="answer1" formControlName="goodAnswer">
+                            <input type="text" class="form-control" formControlName="answerField1"> 
+                        </li>
+                        <li>
+                            <input type="radio" name="goodAnswer" value="answer2" formControlName="goodAnswer">
+                            <input type="text" class="form-control" formControlName="answerField2"> 
+                        </li>
+                        <li>
+                            <input type="radio" name="goodAnswer" value="answer3" formControlName="goodAnswer">
+                            <input type="text" class="form-control" formControlName="answerField3"> 
+                        </li>
+                        <li>
+                            <input type="radio" name="goodAnswer" value="answer4" formControlName="goodAnswer">
+                            <input type="text" class="form-control" formControlName="answerField4"> 
+                        </li>
+                    </ul>
+                    <input type="radio" name="difficulty" value="easy" formControlName="difficulty"> <label>Facile</label>
+                    <input type="radio" name="difficulty" value="normal" formControlName="difficulty"> <label>Normal</label>
+                    <input type="radio" name="difficulty" value="hard" formControlName="difficulty"> <label>Difficile</label>
+                    <br>
+                </div>
+                <button class="btn btn-outline-primary" type="submit">Créer</button>
+            </form>
+        </div>
+    
+        <div class="card">
+            <div class="card-body">
+                <form class="form" [formGroup]="logoutForm" (ngSubmit)="logout()">
+                    <div class="form-group"></div>
+                    <button class="btn btn-outline-primary" type="submit">Se déconnecter</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
 </div>
