@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
     });
 
     this.questions = this.questService.listQuestions();
-    console.log(this.questions);
 
     this.deleteForm = this.formBuilder.group({
       deleteChoice: new FormControl('', Validators.required)
